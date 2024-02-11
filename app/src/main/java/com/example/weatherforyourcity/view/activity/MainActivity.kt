@@ -12,13 +12,13 @@ import com.example.weatherforyourcity.model.constant.MAIN
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
-    lateinit var navController: NavController
+    private var binding: ActivityMainBinding? = null
+    var navController: NavController? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        val view = binding.root
+        val view = binding?.root
         setContentView(view)
 
         MAIN = this

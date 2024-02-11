@@ -16,7 +16,7 @@ import com.example.weatherforyourcity.viewmodel.FirstFragmentViewModel
 class FirstFragment : Fragment(){
 
     private var binding: FragmentFirstBinding? = null
-    private lateinit var firstViewModel:FirstFragmentViewModel
+    private var firstViewModel:FirstFragmentViewModel? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,9 +33,9 @@ class FirstFragment : Fragment(){
         firstViewModel = ViewModelProvider(this)[FirstFragmentViewModel::class.java]
 
         //асинхронная отправка запроса о получении погоды для трех городов
-        firstViewModel.getPopularWeatherInCity()
-        firstViewModel.weatherInCity.observe(viewLifecycleOwner){ response ->
-            when(firstViewModel.numberCity){
+        firstViewModel?.getPopularWeatherInCity()
+        firstViewModel?.weatherInCity?.observe(viewLifecycleOwner){ response ->
+            when(firstViewModel?.numberCity){
                 1 -> {
                     binding!!.idFirstCs1Temp.text = "${response.body()!!.main.temp.toInt()-273}°C"
                     binding!!.idFirstCs1TvCity.text = response.body()!!.name
@@ -56,22 +56,22 @@ class FirstFragment : Fragment(){
 
         //переход ко второму экрану для показа дополнительной информации по 1 городу
         binding!!.idFirstCs1.setOnClickListener {
-            firstViewModel.goToSecondFragmentForShowInformation(binding!!.idFirstCs1TvCity.text.toString())
+            firstViewModel?.goToSecondFragmentForShowInformation(binding!!.idFirstCs1TvCity.text.toString())
         }
 
         //переход ко второму экрану для показа дополнительной информации по 2 городу
         binding!!.idFirstCs2.setOnClickListener {
-            firstViewModel.goToSecondFragmentForShowInformation(binding!!.idFirstCs2TvCity.text.toString())
+            firstViewModel?.goToSecondFragmentForShowInformation(binding!!.idFirstCs2TvCity.text.toString())
         }
 
         //переход ко второму экрану для показа дополнительной информации по 3 городу
         binding!!.idFirstCs3.setOnClickListener {
-            firstViewModel.goToSecondFragmentForShowInformation(binding!!.idFirstCs3TvCity.text.toString())
+            firstViewModel?.goToSecondFragmentForShowInformation(binding!!.idFirstCs3TvCity.text.toString())
         }
 
         //переход к поиску погоды
         binding!!.idFirstCsFind.setOnClickListener {
-            firstViewModel.goToSecondFragment()
+            firstViewModel?.goToSecondFragment()
         }
 
         //выход из игры
@@ -100,7 +100,7 @@ class FirstFragment : Fragment(){
         builder.setItems(options) { dialog, which ->
             when (which) {
                 0 -> {
-                    firstViewModel.exitingApplication()
+                    firstViewModel?.exitingApplication()
                 }
                 1 -> {
                     dialog.cancel()

@@ -19,19 +19,19 @@ class Repository {
 
     //показ первого экрана
     fun showFirstFragment(){
-        MAIN.navController.navigate(R.id.action_secondFragment_to_firstFragment)
+        MAIN.navController?.navigate(R.id.action_secondFragment_to_firstFragment)
     }
 
     //показ второго экрана
     fun showSecondFragment(){
-        MAIN.navController.navigate(R.id.action_firstFragment_to_secondFragment)
+        MAIN.navController?.navigate(R.id.action_firstFragment_to_secondFragment)
     }
 
     //показ второго экрана с просмотром дополнительной информации
     fun showSecondFragmentForShowInformation(nameCity: String){
         val bundle = Bundle()
         bundle.putString(WEATHER,nameCity)
-        MAIN.navController.navigate(R.id.action_firstFragment_to_secondFragment,bundle)
+        MAIN.navController?.navigate(R.id.action_firstFragment_to_secondFragment,bundle)
     }
 
     //закрытие приложения

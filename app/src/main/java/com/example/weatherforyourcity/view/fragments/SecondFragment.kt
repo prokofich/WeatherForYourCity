@@ -10,7 +10,6 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.weatherforyourcity.databinding.FragmentSecondBinding
-import com.example.weatherforyourcity.model.WeatherModel
 import com.example.weatherforyourcity.model.constant.MY_KEY
 import com.example.weatherforyourcity.model.constant.WEATHER
 import com.example.weatherforyourcity.viewmodel.SecondFragmentViewModel
@@ -19,8 +18,7 @@ import com.example.weatherforyourcity.viewmodel.SecondFragmentViewModel
 class SecondFragment : Fragment() {
 
     private var binding: FragmentSecondBinding? = null
-    private lateinit var secondViewModel:SecondFragmentViewModel
-    private lateinit var weatherModel:WeatherModel
+    private var secondViewModel:SecondFragmentViewModel? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,9 +35,9 @@ class SecondFragment : Fragment() {
         secondViewModel = ViewModelProvider(this)[SecondFragmentViewModel::class.java]
 
         //показ полученных данных
-        secondViewModel.weatherInCity.observe(viewLifecycleOwner){ response ->
+        secondViewModel?.weatherInCity?.observe(viewLifecycleOwner){ response ->
             binding!!.idSecondCsInfo.isVisible = true
-            binding!!.idSecondTvCity.text = "${response.body()!!.name},${response.body()!!.sys.country}" //город и страна
+            binding!!.idSecondTvCity.text = "${response?.body()!!.name},${response.body()!!.sys.country}" //город и страна
             binding!!.idSecondTvTemp.text = "${response.body()!!.main.temp.toInt()-273}°C" // средняя температура
             binding!!.idSecondTvMaxTemp.text = "MAX:${response.body()!!.main.temp_max.toInt()-273}°C" // максимальная температура
             binding!!.idSecondTvMinTemp.text = "MIN:${response.body()!!.main.temp_min.toInt()-273}°C" // минимальная температура
@@ -56,27 +54,27 @@ class SecondFragment : Fragment() {
         //показ данных
         if(arguments!=null){
             val nameCity = arguments?.getString(WEATHER)
-            secondViewModel.getWeatherInCity(requireContext(),nameCity!!,"5add6a6a1179b651037584ea12d07431")
+            secondViewModel?.getWeatherInCity(requireContext(),nameCity!!,"5add6a6a1179b651037584ea12d07431")
         }
 
         //поиск погоды
         binding!!.idSecondButtonSearch.setOnClickListener {
             if(binding!!.idSecondEt.text.isNotEmpty()){
-                secondViewModel.getWeatherInCity(requireContext(),binding!!.idSecondEt.text.toString(),MY_KEY)
+                secondViewModel?.getWeatherInCity(requireContext(),binding!!.idSecondEt.text.toString(),MY_KEY)
                 binding!!.idSecondEt.text.clear()
             }else{
-                secondViewModel.showToast(requireContext(),"you did not enter the city name")
+                secondViewModel?.showToast(requireContext(),"you did not enter the city name")
             }
         }
 
         //показ первого экрана
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner){
-            secondViewModel.goToFirstFragment()
+            secondViewModel?.goToFirstFragment()
         }
 
         //показ первого фрагмента
         binding!!.idSecondButtonBack.setOnClickListener {
-            secondViewModel.goToFirstFragment()
+            secondViewModel?.goToFirstFragment()
         }
 
     }

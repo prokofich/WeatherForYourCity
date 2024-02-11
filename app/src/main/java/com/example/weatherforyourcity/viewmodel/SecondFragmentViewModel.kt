@@ -14,8 +14,8 @@ import retrofit2.Response
 
 class SecondFragmentViewModel:ViewModel() {
 
-    val weatherInCity : MutableLiveData<Response<WeatherModel>> = MutableLiveData()
-    lateinit var answer:Response<WeatherModel>
+    val weatherInCity : MutableLiveData<Response<WeatherModel>?> = MutableLiveData()
+    private var answer:Response<WeatherModel>? = null
 
     //функция перехода к первому экрану
     fun goToFirstFragment(){

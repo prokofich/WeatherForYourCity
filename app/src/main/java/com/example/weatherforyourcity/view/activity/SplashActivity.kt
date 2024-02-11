@@ -12,12 +12,12 @@ import com.example.weatherforyourcity.viewmodel.SplashViewModel
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivitySplashBinding
+    private var binding: ActivitySplashBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySplashBinding.inflate(layoutInflater)
-        val view = binding.root
+        val view = binding?.root
         setContentView(view)
 
         //старт анимации загрузки
@@ -35,9 +35,9 @@ class SplashActivity : AppCompatActivity() {
 
     //функция показа анимации загрузки
     private fun startAnimationProgress(){
-        binding.idSplashPb.max = 2000
+        binding?.idSplashPb?.max = 2000
         val finishProgress = 2000
-        ObjectAnimator.ofInt(binding.idSplashPb,"progress",finishProgress)
+        ObjectAnimator.ofInt(binding?.idSplashPb,"progress",finishProgress)
             .setDuration(4000)
             .start()
     }
