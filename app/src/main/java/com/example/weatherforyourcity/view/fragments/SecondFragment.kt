@@ -17,8 +17,8 @@ import com.example.weatherforyourcity.viewmodel.SecondFragmentViewModel
 
 class SecondFragment : Fragment() {
 
-    private var binding: FragmentSecondBinding? = null
-    private var secondViewModel:SecondFragmentViewModel? = null
+    private var binding : FragmentSecondBinding? = null
+    private var secondViewModel : SecondFragmentViewModel? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,33 +35,33 @@ class SecondFragment : Fragment() {
         secondViewModel = ViewModelProvider(this)[SecondFragmentViewModel::class.java]
 
         //показ полученных данных
-        secondViewModel?.weatherInCity?.observe(viewLifecycleOwner){ response ->
-            binding!!.idSecondCsInfo.isVisible = true
-            binding!!.idSecondTvCity.text = "${response?.body()!!.name},${response.body()!!.sys.country}" //город и страна
-            binding!!.idSecondTvTemp.text = "${response.body()!!.main.temp.toInt()-273}°C" // средняя температура
-            binding!!.idSecondTvMaxTemp.text = "MAX:${response.body()!!.main.temp_max.toInt()-273}°C" // максимальная температура
-            binding!!.idSecondTvMinTemp.text = "MIN:${response.body()!!.main.temp_min.toInt()-273}°C" // минимальная температура
-            binding!!.idSecondTvFeelsLike.text = "FEELS LIKE:${response.body()!!.main.feels_like.toInt()-273}°C" // ощущаемая температура
-            binding!!.idSecondTvMain.text = response.body()!!.weather[0].main // описание
-            binding!!.idSecondTvDesc.text = response.body()!!.weather[0].description // описание
-            binding!!.idSecondTvPressure.text = "Atmospheric pressure on the sea level ${response.body()!!.main.pressure}hPa" // давление
-            binding!!.idSecondTvHumidity.text = "Humidity ${response.body()!!.main.humidity}%" // влажность
-            binding!!.idSecondTvCloudsAll.text = "Cloudiness ${response.body()!!.clouds.all}%" // облачность
-            binding!!.idSecondTvVisibility.text = "Visibility ${response.body()!!.visibility}m" // видимость
-            binding!!.idSecondTvWindSpeed.text = "Wind speed ${response.body()!!.wind.speed} meter/sec"
+        secondViewModel?.weatherInCity?.observe(viewLifecycleOwner){
+            binding?.idSecondCsInfo?.isVisible = true
+            binding?.idSecondTvCity?.text = "${it?.body()?.name},${it?.body()?.sys?.country}" //город и страна
+            binding?.idSecondTvTemp?.text = "${it?.body()?.main?.temp?.toInt()?.minus(273)}°C" // средняя температура
+            binding?.idSecondTvMaxTemp?.text = "MAX:${it?.body()?.main?.temp_max?.toInt()?.minus(273)}°C" // максимальная температура
+            binding?.idSecondTvMinTemp?.text = "MIN:${it?.body()?.main?.temp_min?.toInt()?.minus(273)}°C" // минимальная температура
+            binding?.idSecondTvFeelsLike?.text = "FEELS LIKE:${it?.body()?.main?.feels_like?.toInt()?.minus(273)}°C" // ощущаемая температура
+            binding?.idSecondTvMain?.text = it?.body()?.weather?.get(0)?.main // описание
+            binding?.idSecondTvDesc?.text = it?.body()?.weather?.get(0)?.description // описание
+            binding?.idSecondTvPressure?.text = "Atmospheric pressure on the sea level ${it?.body()?.main?.pressure}hPa" // давление
+            binding?.idSecondTvHumidity?.text = "Humidity ${it?.body()?.main?.humidity}%" // влажность
+            binding?.idSecondTvCloudsAll?.text = "Cloudiness ${it?.body()?.clouds?.all}%" // облачность
+            binding?.idSecondTvVisibility?.text = "Visibility ${it?.body()?.visibility}m" // видимость
+            binding?.idSecondTvWindSpeed?.text = "Wind speed ${it?.body()?.wind?.speed} meter/sec"
         }
 
         //показ данных
-        if(arguments!=null){
-            val nameCity = arguments?.getString(WEATHER)
+        arguments?.let{
+            val nameCity = it.getString(WEATHER)
             secondViewModel?.getWeatherInCity(requireContext(),nameCity!!,"5add6a6a1179b651037584ea12d07431")
         }
 
         //поиск погоды
-        binding!!.idSecondButtonSearch.setOnClickListener {
-            if(binding!!.idSecondEt.text.isNotEmpty()){
-                secondViewModel?.getWeatherInCity(requireContext(),binding!!.idSecondEt.text.toString(),MY_KEY)
-                binding!!.idSecondEt.text.clear()
+        binding?.idSecondButtonSearch?.setOnClickListener {
+            if(binding?.idSecondEt?.text?.isNotEmpty() == true){
+                secondViewModel?.getWeatherInCity(requireContext(),binding?.idSecondEt?.text.toString(),MY_KEY)
+                binding?.idSecondEt?.text?.clear()
             }else{
                 secondViewModel?.showToast(requireContext(),"you did not enter the city name")
             }
@@ -73,7 +73,7 @@ class SecondFragment : Fragment() {
         }
 
         //показ первого фрагмента
-        binding!!.idSecondButtonBack.setOnClickListener {
+        binding?.idSecondButtonBack?.setOnClickListener {
             secondViewModel?.goToFirstFragment()
         }
 

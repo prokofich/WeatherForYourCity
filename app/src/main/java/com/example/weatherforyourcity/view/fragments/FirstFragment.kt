@@ -12,11 +12,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.weatherforyourcity.databinding.FragmentFirstBinding
 import com.example.weatherforyourcity.viewmodel.FirstFragmentViewModel
 
-
 class FirstFragment : Fragment(){
 
-    private var binding: FragmentFirstBinding? = null
-    private var firstViewModel:FirstFragmentViewModel? = null
+    private var binding : FragmentFirstBinding? = null
+    private var firstViewModel : FirstFragmentViewModel? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,48 +33,49 @@ class FirstFragment : Fragment(){
 
         //асинхронная отправка запроса о получении погоды для трех городов
         firstViewModel?.getPopularWeatherInCity()
-        firstViewModel?.weatherInCity?.observe(viewLifecycleOwner){ response ->
+
+        firstViewModel?.weatherInCity?.observe(viewLifecycleOwner){
             when(firstViewModel?.numberCity){
                 1 -> {
-                    binding!!.idFirstCs1Temp.text = "${response.body()!!.main.temp.toInt()-273}°C"
-                    binding!!.idFirstCs1TvCity.text = response.body()!!.name
-                    binding!!.idFirstCs1TvDesc.text = response.body()!!.weather[0].main
+                    binding?.idFirstCs1Temp?.text = "${it.body()?.main?.temp?.toInt()?.minus(273)}°C"
+                    binding?.idFirstCs1TvCity?.text = it.body()?.name
+                    binding?.idFirstCs1TvDesc?.text = it.body()?.weather?.get(0)?.main
                 }
                 2 -> {
-                    binding!!.idFirstCs2Temp.text = "${response.body()!!.main.temp.toInt()-273}°C"
-                    binding!!.idFirstCs2TvCity.text = response.body()!!.name
-                    binding!!.idFirstCs2TvDesc.text = response.body()!!.weather[0].main
+                    binding?.idFirstCs2Temp?.text = "${it.body()?.main?.temp?.toInt()?.minus(273)}°C"
+                    binding?.idFirstCs2TvCity?.text = it.body()?.name
+                    binding?.idFirstCs2TvDesc?.text = it.body()?.weather?.get(0)?.main
                 }
                 3 -> {
-                    binding!!.idFirstCs3Temp.text = "${response.body()!!.main.temp.toInt()-273}°C"
-                    binding!!.idFirstCs3TvCity.text = response.body()!!.name
-                    binding!!.idFirstCs3TvDesc.text = response.body()!!.weather[0].main
+                    binding?.idFirstCs3Temp?.text = "${it.body()?.main?.temp?.toInt()?.minus(273)}°C"
+                    binding?.idFirstCs3TvCity?.text = it.body()?.name
+                    binding?.idFirstCs3TvDesc?.text = it.body()?.weather?.get(0)?.main
                 }
             }
         }
 
         //переход ко второму экрану для показа дополнительной информации по 1 городу
-        binding!!.idFirstCs1.setOnClickListener {
-            firstViewModel?.goToSecondFragmentForShowInformation(binding!!.idFirstCs1TvCity.text.toString())
+        binding?.idFirstCs1?.setOnClickListener {
+            firstViewModel?.goToSecondFragmentForShowInformation(binding?.idFirstCs1TvCity?.text.toString())
         }
 
         //переход ко второму экрану для показа дополнительной информации по 2 городу
-        binding!!.idFirstCs2.setOnClickListener {
-            firstViewModel?.goToSecondFragmentForShowInformation(binding!!.idFirstCs2TvCity.text.toString())
+        binding?.idFirstCs2?.setOnClickListener {
+            firstViewModel?.goToSecondFragmentForShowInformation(binding?.idFirstCs2TvCity?.text.toString())
         }
 
         //переход ко второму экрану для показа дополнительной информации по 3 городу
-        binding!!.idFirstCs3.setOnClickListener {
-            firstViewModel?.goToSecondFragmentForShowInformation(binding!!.idFirstCs3TvCity.text.toString())
+        binding?.idFirstCs3?.setOnClickListener {
+            firstViewModel?.goToSecondFragmentForShowInformation(binding?.idFirstCs3TvCity?.text.toString())
         }
 
         //переход к поиску погоды
-        binding!!.idFirstCsFind.setOnClickListener {
+        binding?.idFirstCsFind?.setOnClickListener {
             firstViewModel?.goToSecondFragment()
         }
 
         //выход из игры
-        binding!!.idFirstButtonExit.setOnClickListener {
+        binding?.idFirstButtonExit?.setOnClickListener {
             showExitDialog()
         }
 
@@ -99,12 +99,8 @@ class FirstFragment : Fragment(){
         builder.setTitle("do you want to get out?")
         builder.setItems(options) { dialog, which ->
             when (which) {
-                0 -> {
-                    firstViewModel?.exitingApplication()
-                }
-                1 -> {
-                    dialog.cancel()
-                }
+                0 -> { firstViewModel?.exitingApplication() }
+                1 -> { dialog.cancel() }
             }
             dialog.dismiss()
         }

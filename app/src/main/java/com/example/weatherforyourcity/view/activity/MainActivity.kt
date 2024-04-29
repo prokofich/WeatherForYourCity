@@ -12,8 +12,8 @@ import com.example.weatherforyourcity.model.constant.MAIN
 
 class MainActivity : AppCompatActivity() {
 
-    private var binding: ActivityMainBinding? = null
-    var navController: NavController? = null
+    private var binding : ActivityMainBinding? = null
+    var navController : NavController? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,13 +23,6 @@ class MainActivity : AppCompatActivity() {
 
         MAIN = this
         navController = Navigation.findNavController(this,R.id.id_nav_host)
-
-        //установка полноэкранного режима
-        @Suppress("DEPRECATION")
-        window.setFlags(
-            WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN
-        )
 
     }
 }

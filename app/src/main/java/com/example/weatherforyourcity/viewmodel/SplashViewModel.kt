@@ -10,9 +10,9 @@ import kotlinx.coroutines.launch
 
 class SplashViewModel: ViewModel() {
 
-    var flagFinishProgress:MutableLiveData<Boolean> = MutableLiveData()
+    val flagFinishProgress : MutableLiveData <Boolean> = MutableLiveData()
 
-    fun startProgress(){
+    fun startProgress() {
         viewModelScope.launch(Dispatchers.Main){
             delay(4000)
             flagFinishProgress.value = true

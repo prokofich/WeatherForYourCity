@@ -12,7 +12,7 @@ import com.example.weatherforyourcity.viewmodel.SplashViewModel
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
 
-    private var binding: ActivitySplashBinding? = null
+    private var binding : ActivitySplashBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,8 +43,6 @@ class SplashActivity : AppCompatActivity() {
     }
 
     //переход к основной части приложения
-    private fun goToMainActivity(){
-        startActivity(Intent(this,MainActivity::class.java))
-    }
+    private fun goToMainActivity() = startActivity(Intent(this,MainActivity::class.java))
 
 }

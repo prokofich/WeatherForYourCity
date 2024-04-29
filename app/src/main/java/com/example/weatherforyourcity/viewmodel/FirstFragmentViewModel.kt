@@ -11,24 +11,20 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.Response
 
-class FirstFragmentViewModel:ViewModel() {
+class FirstFragmentViewModel : ViewModel() {
 
-    val weatherInCity : MutableLiveData<Response<WeatherModel>> = MutableLiveData()
+    val weatherInCity : MutableLiveData <Response <WeatherModel> > = MutableLiveData()
 
     var numberCity = 0
 
     //закрытие приложения
-    fun exitingApplication(){
-        repository.exitingApplication()
-    }
+    fun exitingApplication() = repository.exitingApplication()
 
     //переход ко второму экрану
-    fun goToSecondFragment(){
-        repository.showSecondFragment()
-    }
+    fun goToSecondFragment() = repository.showSecondFragment()
 
     //переход ко второму экрану для показа дополнительной информации
-    fun goToSecondFragmentForShowInformation(city: String){
+    fun goToSecondFragmentForShowInformation(city : String) {
         repository.showSecondFragmentForShowInformation(city)
     }
 
