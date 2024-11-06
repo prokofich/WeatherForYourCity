@@ -12,37 +12,38 @@ import com.example.weatherforyourcity.viewmodel.SplashViewModel
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
 
-    private var binding : ActivitySplashBinding? = null
+    private var _binding : ActivitySplashBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySplashBinding.inflate(layoutInflater)
-        val view = binding?.root
+        _binding = ActivitySplashBinding.inflate(layoutInflater)
+        val view = binding.root
         setContentView(view)
 
-        //старт анимации загрузки
+        /** старт анимации загрузки */
         startAnimationProgress()
 
         val splashViewModel = ViewModelProvider(this)[SplashViewModel::class.java]
         splashViewModel.startProgress()
 
-        //переход к новому экрану
+        /** переход к новому экрану */
         splashViewModel.flagFinishProgress.observe(this){
             goToMainActivity()
         }
         
     }
 
-    //функция показа анимации загрузки
+    /** функция показа анимации загрузки */
     private fun startAnimationProgress(){
-        binding?.idSplashPb?.max = 2000
+        binding.idSplashPb.max = 2000
         val finishProgress = 2000
-        ObjectAnimator.ofInt(binding?.idSplashPb,"progress",finishProgress)
+        ObjectAnimator.ofInt(binding.idSplashPb,"progress",finishProgress)
             .setDuration(4000)
             .start()
     }
 
-    //переход к основной части приложения
+    /** переход к основной части приложения */
     private fun goToMainActivity() = startActivity(Intent(this,MainActivity::class.java))
 
 }

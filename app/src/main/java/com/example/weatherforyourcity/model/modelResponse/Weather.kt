@@ -1,4 +1,4 @@
-package com.example.weatherforyourcity.model
+package com.example.weatherforyourcity.model.modelResponse
 import androidx.annotation.Keep
 
 @Keep
